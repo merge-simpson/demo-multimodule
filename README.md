@@ -1,3 +1,9 @@
+<table>
+  <tr>
+    <td>🏗</td>
+    <td>Coming soon . . .</td>
+  </tr>
+</table>
 
 # Demo Multi-Module Project
 
