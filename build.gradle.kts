@@ -1,5 +1,6 @@
 plugins {
     java
+    id("java-library")
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -9,12 +10,10 @@ allprojects {
     version = "0.0.1-SNAPSHOT"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
 subprojects {
     apply {
         plugin("java")
+        plugin("java-library")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
     }
