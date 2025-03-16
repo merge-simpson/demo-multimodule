@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     java
     id("java-library")
@@ -8,6 +10,10 @@ plugins {
 allprojects {
     group = "nettee"
     version = "0.0.1-SNAPSHOT"
+
+    tasks.withType<BootJar> {
+        enabled = false
+    }
 }
 
 subprojects {
@@ -21,5 +27,9 @@ subprojects {
     repositories {
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
+    }
+
+    dependencies {
+        api(project(":common"))
     }
 }
