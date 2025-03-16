@@ -17,6 +17,10 @@ subprojects {
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
     }
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 java {
