@@ -28,4 +28,8 @@ subprojects {
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
     }
+
+    dependencies {
+        api(project(":common"))
+    }
 }
