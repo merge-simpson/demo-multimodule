@@ -24,7 +24,7 @@ body:
       label: 이슈 내용
       description: 어떤 작업이 필요한지 설명해 주세요.
       placeholder: Tell us what you want!
-      value: ""
+      # value: ""
     validations:
       required: true
   - type: textarea
@@ -33,7 +33,7 @@ body:
       label: 부연 설명
       description: 필요한 설명이 있다면 추가해 주세요.
       placeholder: Tell us the background of this issue!
-      value: ""
+      # value: ""
     validations:
       required: false
 #  - type: dropdown
