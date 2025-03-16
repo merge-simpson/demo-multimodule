@@ -1,4 +1,7 @@
 rootProject.name = "demo-multimodule"
 
-apply(from = "gradle-scripts/common.gradle.kts")
-apply(from = "gradle-scripts/core.gradle.kts")
+val gradleScriptsDir = "gradle-scripts"
+
+apply(from = "$gradleScriptsDir/common.gradle.kts")
+apply(from = "$gradleScriptsDir/core.gradle.kts")
+apply(from = "$gradleScriptsDir/board.gradle.kts")
