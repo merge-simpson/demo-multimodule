@@ -1,0 +1,6 @@
+spring:
+  application.name: monolithic-main-runner
+
+  config:
+    import:
+      - db/db-properties.yml
