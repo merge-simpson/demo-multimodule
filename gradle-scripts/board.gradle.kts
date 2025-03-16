@@ -13,6 +13,7 @@ include(
 include(
     ":board:application",
     ":board:rdb-adapter",
+    ":board:web-adapter",
 )
 
 project(":board").projectDir = file("${rootProject.projectDir}/services/board")
@@ -22,3 +23,4 @@ project(":board:readmodel").projectDir = file("${rootProject.projectDir}/service
 project(":board:exception").projectDir = file("${rootProject.projectDir}/services/board/api/exception")
 project(":board:application").projectDir = file("${rootProject.projectDir}/services/board/application")
 project(":board:rdb-adapter").projectDir = file("${rootProject.projectDir}/services/board/driven/rdb")
+project(":board:web-adapter").projectDir = file("${rootProject.projectDir}/services/board/driving/web")
