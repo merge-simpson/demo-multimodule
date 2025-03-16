@@ -1,4 +1,4 @@
-val coreDir = "../core-modules"
+val coreDir = "${rootProject.projectDir}/core-modules"
 
 include(
     ":nettee:jpa-core",
