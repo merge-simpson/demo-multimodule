@@ -12,6 +12,17 @@ allprojects {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+subprojects {
+    apply {
+        plugin("java")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
