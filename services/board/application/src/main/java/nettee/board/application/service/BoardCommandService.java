@@ -14,6 +14,6 @@ public class BoardCommandService implements BoardCreateUseCase {
 
     @Override
     public Board createBoard(Board board) {
-        return repository.create(board);
+        return repository.save(board);
     }
 }
