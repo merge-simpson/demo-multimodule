@@ -16,7 +16,7 @@ public class BoardRdbCommandRepositoryAdapter implements BoardCommandRepositoryP
 
     @Override
     public Board save(Board board) {
-        var entity = boardJpaRepository.save(mapper.toEntity(board));
-        return mapper.toDomain(entity);
+        var entity = mapper.toEntity(board);
+        return mapper.toDomain(boardJpaRepository.save(entity));
     }
 }
