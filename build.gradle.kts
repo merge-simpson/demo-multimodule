@@ -31,5 +31,7 @@ subprojects {
 
     dependencies {
         api(project(":common"))
+        compileOnly("org.projectlombok:lombok")
+        compileOnly("org.springframework:spring-web")
     }
 }
