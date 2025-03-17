@@ -33,5 +33,6 @@ subprojects {
         api(project(":common"))
         compileOnly("org.projectlombok:lombok")
         compileOnly("org.springframework:spring-web")
+        compileOnly("org.springframework:spring-context")
     }
 }
