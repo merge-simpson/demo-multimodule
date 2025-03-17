@@ -13,4 +13,7 @@ dependencies {
 
     // if flyway configuration required
     compileOnly("org.flywaydb:flyway-database-postgresql")
+
+    // mapstruct
+    compileOnly("org.mapstruct:mapstruct:1.6.3")
 }
