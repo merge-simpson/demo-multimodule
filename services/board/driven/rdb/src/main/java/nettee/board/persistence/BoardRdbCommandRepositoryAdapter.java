@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardCommandRepositoryAdapter implements BoardCommandRepositoryPort {
+public class BoardRdbCommandRepositoryAdapter implements BoardCommandRepositoryPort {
 
     private final BoardJpaRepository boardJpaRepository;
     private final BoardEntityMapper mapper;
