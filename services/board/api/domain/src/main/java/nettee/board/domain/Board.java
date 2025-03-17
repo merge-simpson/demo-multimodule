@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Board {
 
-    private Long id;
+    private String id;
 
     private String title;
     private String content;
