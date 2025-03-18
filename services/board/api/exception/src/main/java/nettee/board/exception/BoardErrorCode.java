@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static org.springframework.http.HttpStatus.*;
-
 public enum BoardErrorCode implements ErrorCode {
     BOARD_ALREADY_EXISTS(HttpStatus.CONFLICT),
     BOARD_NOT_FOUND(HttpStatus.NOT_FOUND),
