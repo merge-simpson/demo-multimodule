@@ -16,4 +16,7 @@ dependencies {
 
     // mapstruct
     compileOnly("org.mapstruct:mapstruct:1.6.3")
+
+    // enum util
+    api("com.github.merge-simpson:enum-util:0.1.0")
 }
