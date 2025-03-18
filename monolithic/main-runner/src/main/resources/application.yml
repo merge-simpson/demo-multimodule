@@ -9,4 +9,4 @@ spring:
         # - properties/db/order.database.yml        #   or we can use {spec-name}/order.{detailed-spec-name}.yml
         # - properties/db/product.database.yml      #   e.g., `repository/product.repository.yml`
         # - properties/db/{namespace}.database.yml  #   then adapters can handle the property files by themselves.
-      - properties/web/main.cors.yml
+      - properties/web/main.web.yml

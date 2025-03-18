@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: ${MAIN_POSTGRESQL_URL:jdbc:postgresql://localhost:5442/board}
+    username: ${MAIN_POSTGRESQL_USERNAME:root}
+    password: ${MAIN_POSTGRESQL_PASSWORD:root}
