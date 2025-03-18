@@ -16,6 +16,8 @@ dependencies {
 
     // mapstruct
     compileOnly("org.mapstruct:mapstruct:1.6.3")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
     // enum util
     api("com.github.merge-simpson:enum-util:0.1.0")
