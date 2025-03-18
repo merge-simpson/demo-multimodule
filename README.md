@@ -1,6 +1,42 @@
+- [프로젝트 환경 구축](#installation)
 - [모놀리스 지향 멀티모듈 프로젝트](#ko-monolith)
 - [서비스 통합 및 독립의 유연한 전환을 위한 리소스 관리 전략](#ko-resources)
 - [각 모듈의 역할](#ko-module-role)
+- [추가적인 작업 설명](#additional-works)
+
+<br />
+
+<table border="3">
+<tr>
+  <td width="45">💡</td>
+  <td>
+
+  이 레포지터리는 [Nettee](https://github.com/nettee-space) 멤버들이 멀티모듈 프로젝트 구조를 각자의 관점으로 연구하는 일환으로 작성되었습니다.
+  따라서 팀 내에서 논의할 항목이 아니면 일부 설명이 제외되며,
+  [헥사고날 아키텍처 온보딩 프로젝트](https://github.com/nettee-space/backend-sample-hexagonal-simple-crud)에서
+  이미 다룬 내용에 대한 설명이 대부분 제외되었습니다.
+
+  </td>
+</tr>
+</table>
+
+<a id="installation"></a>
+
+# 프로젝트 환경 구축
+
+**스크립트 권한 부여** (Mac, Linux)
+
+```shell
+chmod +x compose-monolith
+```
+
+**모놀리스용 도커 컴포즈 환경 구축** (Mac, Linux, Win*)
+
+윈도우 환경에서는 테스트가 필요합니다.
+
+```shell
+./compose-monolith up -d
+```
 
 # Demo Multi-Module Project
 
@@ -137,3 +173,21 @@ Core 모듈은 이 API 모듈을 사용해서 특정 기능을 구현하거나 �
 - Application 모듈: 포트(repository, use-case) 및 서비스 레이어를 제공합니다.
 - RDB Adapter 모듈: Repository 포트를 구현한 어댑터를 제공합니다.
 - Web Adapter 모듈: 쉽게 말해 컨트롤러와 DTO 등을 제공합니다.
+
+<a id="additional-works"></a>
+
+## 추가적인 작업
+
+### Board Entity Status 코드 값의 각 비트가 의미를 갖습니다.
+
+다음 내용을 담아 Semantic code를 사용합니다.
+이는 데이터베이스 등 인프라스트럭처에 종속되는 Driven Adapter 특성을 고려해, 데이터베이스 변경 시 바뀔 수 있는 값입니다.
+
+- 4바이트 정수를 사용합니다. (PostgreSQL INTEGER)
+- R CCC CCCC CCCC CCCC C DDD DDDD DDDD DDDD
+  - R: General Purpose Readable
+    - 1: Readable, 0: Unreadable
+  - C: Classifying Bits (16 bits)
+  - D: Detailed or Padded Bits (15 bits)
+- 각 상태가 갖는 코드 값은 고유해야 합니다.
+
