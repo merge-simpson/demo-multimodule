@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -9,6 +10,15 @@ plugins {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+    configureEach {
+        exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
     }
 }
 
@@ -88,4 +98,8 @@ tasks.withType<JavaCompile> {
 
 tasks.named<JavaExec>("bootRun") {
     jvmArgs("--enable-preview")
+}
+
+tasks.withType<BootJar> {
+    enabled = true
 }
