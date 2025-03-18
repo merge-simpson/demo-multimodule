@@ -30,7 +30,9 @@ subprojects {
     }
 
     dependencies {
-        api(project(":common"))
+        if (project.name != "common") {
+            api(project(":common"))
+        }
         compileOnly("org.projectlombok:lombok")
         compileOnly("org.springframework:spring-web")
         compileOnly("org.springframework:spring-context")
