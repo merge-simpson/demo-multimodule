@@ -3,6 +3,7 @@ package nettee.board.web;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nettee.board.application.usecase.BoardCreateUseCase;
+import nettee.board.domain.type.BoardStatus;
 import nettee.board.web.dto.BoardCommandDto.BoardCreateCommand;
 import nettee.board.web.dto.BoardCommandDto.BoardCreateResponse;
 import nettee.board.web.mapper.BoardDtoMapper;
@@ -25,10 +26,10 @@ public class BoardCommandApi {
     public BoardCreateResponse create(
             @RequestBody @Valid BoardCreateCommand requestBody
     ) {
-        var boad = mapper.toDomain(requestBody);
+        var board = mapper.toDomain(requestBody, BoardStatus.ACTIVE);
 
         return BoardCreateResponse.builder()
-                .board(boardCreateUseCase.createBoard(boad))
+                .board(boardCreateUseCase.createBoard(board))
                 .build();
     }
 }
