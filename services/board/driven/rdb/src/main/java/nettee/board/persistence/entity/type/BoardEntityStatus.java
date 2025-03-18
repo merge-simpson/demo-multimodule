@@ -1,5 +1,6 @@
 package nettee.board.persistence.entity.type;
 
+import me.letsdev.util.enums.EnumUtil;
 import nettee.board.domain.type.BoardStatus;
 
 import java.util.Arrays;
@@ -9,10 +10,26 @@ import java.util.stream.Collectors;
 import static nettee.board.exception.BoardErrorCode.BOARD_DEFAULT;
 
 public enum BoardEntityStatus {
-    REMOVED(false, 0b0000, 0),
-    PENDING(false, 0b0001, 0),
-    ACTIVE(true, 0b0010, 0),
-    SUSPENDED(true, 0b0100, 0),;
+    REMOVED(
+        SemanticCodeParameters.builder()
+                .canRead(false)
+                .classifyingBits(0b0000_0000_0000_0000)
+    ),
+    PENDING(
+            SemanticCodeParameters.builder()
+                    .canRead(false)
+                    .classifyingBits(0b0000_0000_0000_0001)
+    ),
+    ACTIVE(
+            SemanticCodeParameters.builder()
+                    .canRead(true)
+                    .classifyingBits(0b0000_0000_0000_0010)
+    ),
+    SUSPENDED(
+            SemanticCodeParameters.builder()
+                    .canRead(true)
+                    .classifyingBits(0b0000_0000_0000_0100)
+    );
 
     /*
     R000 0000 0000 0000 0PPP PPPP PPPP PPPP
@@ -24,6 +41,19 @@ public enum BoardEntityStatus {
     private static final int CLASSIFYING_PADDING_SIZE = 15;
 
     private final int code;
+
+    static {
+        assert EnumUtil.isUnique(BoardEntityStatus.class, BoardEntityStatus::getCode)
+                : "BoardEntityStatus의 모든 code 필드가 고유해야 합니다.";
+    }
+
+    BoardEntityStatus(SemanticCodeParameters<Present, Present> semanticCodeParameters) {
+        this(
+                semanticCodeParameters.canRead,
+                semanticCodeParameters.classifyingBits,
+                semanticCodeParameters.detailBits
+        );
+    }
 
     BoardEntityStatus(boolean canRead, int classifyingBits, int detailBits) {
         this.code = (canRead ? 1 << TLB_PADDING_SIZE : 0)
@@ -58,4 +88,36 @@ public enum BoardEntityStatus {
             default -> throw BOARD_DEFAULT.exception();
         };
     }
+
+    static class SemanticCodeParameters<HAS_CAN_READ, HAS_CLASSIFYING_BITS> {
+        boolean canRead;
+        Integer classifyingBits;
+        int detailBits;
+
+        private SemanticCodeParameters() {}
+
+        public static SemanticCodeParameters<Missing, Missing> builder() {
+            return new SemanticCodeParameters<>();
+        }
+
+        SemanticCodeParameters<HAS_CAN_READ, Present> classifyingBits(Integer classifyingBits) {
+            this.classifyingBits = classifyingBits;
+            return (SemanticCodeParameters<HAS_CAN_READ, Present>) this;
+        }
+
+        SemanticCodeParameters<Present, HAS_CLASSIFYING_BITS> canRead(boolean canRead) {
+            this.canRead = canRead;
+            return (SemanticCodeParameters<Present, HAS_CLASSIFYING_BITS>) this;
+        }
+
+        SemanticCodeParameters<HAS_CAN_READ, HAS_CLASSIFYING_BITS> detailBits(int detailBits) {
+            this.detailBits = detailBits;
+            return this;
+        }
+
+    }
+
+    // Marker interfaces
+    interface Missing {}
+    interface Present {}
 }
