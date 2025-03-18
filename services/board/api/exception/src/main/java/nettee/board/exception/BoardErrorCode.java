@@ -14,6 +14,8 @@ public enum BoardErrorCode implements ErrorCode {
     BOARD_GONE(GONE),
     BOARD_FORBIDDEN(FORBIDDEN),
     BOARD_DEFAULT(INTERNAL_SERVER_ERROR);
+    BOARD_TITLE_LENGTH_MIN(HttpStatus.BAD_REQUEST),
+    BOARD_CONTENT_LENGTH_MIN(HttpStatus.BAD_REQUEST),
 
     private static final String NAMESPACE = "board.error";
 
