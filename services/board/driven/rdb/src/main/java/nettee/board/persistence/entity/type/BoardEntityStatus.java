@@ -1,5 +1,6 @@
 package nettee.board.persistence.entity.type;
 
+import me.letsdev.util.enums.EnumUtil;
 import nettee.board.domain.type.BoardStatus;
 
 import java.util.Arrays;
@@ -40,6 +41,11 @@ public enum BoardEntityStatus {
     private static final int CLASSIFYING_PADDING_SIZE = 15;
 
     private final int code;
+
+    static {
+        assert EnumUtil.isUnique(BoardEntityStatus.class, BoardEntityStatus::getCode)
+                : "BoardEntityStatus의 모든 code 필드가 고유해야 합니다.";
+    }
 
     BoardEntityStatus(SemanticCodeParameters<Present, Present> semanticCodeParameters) {
         this(
