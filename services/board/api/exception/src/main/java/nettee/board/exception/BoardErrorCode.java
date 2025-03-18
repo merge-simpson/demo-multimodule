@@ -6,14 +6,14 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static org.springframework.http.HttpStatus.*;
-
 public enum BoardErrorCode implements ErrorCode {
-    BOARD_ALREADY_EXISTS(CONFLICT),
-    BOARD_NOT_FOUND(NOT_FOUND),
-    BOARD_GONE(GONE),
-    BOARD_FORBIDDEN(FORBIDDEN),
-    BOARD_DEFAULT(INTERNAL_SERVER_ERROR);
+    BOARD_ALREADY_EXISTS(HttpStatus.CONFLICT),
+    BOARD_NOT_FOUND(HttpStatus.NOT_FOUND),
+    BOARD_GONE(HttpStatus.GONE),
+    BOARD_FORBIDDEN(HttpStatus.FORBIDDEN),
+    BOARD_TITLE_LENGTH_MIN(HttpStatus.BAD_REQUEST),
+    BOARD_CONTENT_LENGTH_MIN(HttpStatus.BAD_REQUEST),
+    BOARD_DEFAULT(HttpStatus.INTERNAL_SERVER_ERROR);
 
     private static final String NAMESPACE = "board.error";
 
