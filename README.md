@@ -1,3 +1,4 @@
+- [프로젝트 환경 구축](#installation)
 - [모놀리스 지향 멀티모듈 프로젝트](#ko-monolith)
 - [서비스 통합 및 독립의 유연한 전환을 위한 리소스 관리 전략](#ko-resources)
 - [각 모듈의 역할](#ko-module-role)
@@ -17,6 +18,24 @@
   </td>
 </tr>
 </table>
+
+<a id="installation"></a>
+
+# 프로젝트 환경 구축
+
+**스크립트 권한 부여** (Mac, Linux)
+
+```shell
+chmod +x compose-monolith
+```
+
+**모놀리스용 도커 컴포즈 환경 구축** (Mac, Linux, Win*)
+
+윈도우 환경에서는 테스트가 필요합니다.
+
+```shell
+./compose-monolith up -d
+```
 
 # Demo Multi-Module Project
 
