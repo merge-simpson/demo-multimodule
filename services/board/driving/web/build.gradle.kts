@@ -11,6 +11,7 @@ dependencies {
 
     // validation annotation
     compileOnly("jakarta.validation:jakarta.validation-api")
+    compileOnly("jakarta.annotation:jakarta.annotation-api")
 
     // mapstruct
     compileOnly("org.mapstruct:mapstruct:1.6.3")
