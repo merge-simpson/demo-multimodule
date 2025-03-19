@@ -291,3 +291,7 @@ var parameterBuilder = MyObject.parameterBuilder()
 
 var myObject = new MyObject(parameterBuilder);
 ```
+
+예를 들어
+[BaseEntityStatus](services/board/driven/rdb/src/main/java/nettee/board/persistence/entity/type/BoardEntityStatus.java)
+열거상수 생성 시 의미를 부여하는 대입을 보조하기 위해 사용했습니다.
