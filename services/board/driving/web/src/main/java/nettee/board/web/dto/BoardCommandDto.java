@@ -5,9 +5,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import nettee.board.domain.Board;
 
-import static nettee.board.exception.BoardErrorCode.BOARD_CONTENT_LENGTH_MIN;
-import static nettee.board.exception.BoardErrorCode.BOARD_TITLE_LENGTH_MIN;
-
 public final class BoardCommandDto {
 
     private BoardCommandDto() {
@@ -29,13 +26,13 @@ public final class BoardCommandDto {
             title = title.strip(); // trim()의 개선판
             content = content.strip(); // trim() 개선판
 
-            if (title.length() < 3) {
-                throw BOARD_TITLE_LENGTH_MIN.exception();
-            }
-
-            if (content.length() < 3) {
-                throw BOARD_CONTENT_LENGTH_MIN.exception();
-            }
+//            if (title.length() < 3) {
+//                throw BOARD_TITLE_LENGTH_MIN.exception();
+//            }
+//
+//            if (content.length() < 3) {
+//                throw BOARD_CONTENT_LENGTH_MIN.exception();
+//            }
         }
     }
 
