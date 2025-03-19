@@ -15,12 +15,12 @@ public final class BoardCommandDto {
 
     @Builder
     public record BoardCreateCommand(
-            @NotBlank(message = "제목을 입력하세요.")
-            @Size(min = 3, message = "제목은 세 글자 이상 입력하십시오.")
+            @NotBlank(message = "{validation.board.title.notBlank}")
+            @Size(min = 3, message = "{validation.board.title.size.min}")
             String title,
 
-            @NotBlank(message = "본문을 입력하세요.")
-            @Size(min = 3, message = "본문은 세 글자 이상 입력하십시오.")
+            @NotBlank(message = "{validation.board.content.notBlank}")
+            @Size(min = 3, message = "{validation.board.content.size.min}")
             String content
     ) {
         // compact constructor
