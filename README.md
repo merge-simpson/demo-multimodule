@@ -219,3 +219,75 @@ public class MainRunnerApplication {/* ... */}
 - 루트 패키지 및 베이스 패키지에 대해 상수 관리를 할 수 있습니다.
 - 상수 관리 시 컴파일타임 상수로 보장되어야 합니다. (`static final`)
 - 공통 전역 상수 관리는 공통 모듈을 추천합니다.
+
+### 필수 필드의 컴파일타임 체크를 포함하는 빌더 패턴 시도
+
+빌더 패턴을 컴파일타임에 체크하기 위해서 마커인터페이스 및 제네릭을 활용합니다.
+제네릭은 컴파일타임에만 체크되고 런타임에 영향을 주지 않는다는 특징을 이용합니다.
+이러한 컴파일타임 체킹 및 유연한 런타임 제약의 특징은 많은 자바스크립트 사용자가 Typescript 선호를 보이는 이유와 비슷합니다.
+
+- 복잡도: 높음
+- 컴파일타임에 타입 체크 가능
+
+```java
+// marker interfaces
+interface Present {}
+interface Missing {}
+
+class MyObject {
+    private Sring fieldA; // required
+    private Sring fieldB; // required
+    private Sring fieldC; // optional
+    
+    public MyObject(MyObjectParameterBuilder<Present, Present> parameter) {
+        this(parameter.filedA(), parameter.filedB(), parameter.filedC());
+    }
+
+    public MyObject(String fieldA, String fieldB, String fieldC) {
+        this.fieldA = fieldA;
+        this.fieldB = fieldB;
+        this.fieldC = fieldC;
+    }
+    
+    public static MyObjectParameterBuilder<Missing, Missing> parameterBuilder() {
+        return new MyObjectParameterBuilder<>();
+    }
+}
+
+class MyObjectParameterBuilder<HAS_A, HAS_B> {
+    private Sring fieldA; // required
+    private Sring fieldB; // required
+    private Sring fieldC; // optional
+    
+    private MyObjectParameterBuilder() {}
+    
+    // required field (HAS_A = Present, now)
+    public static MyObjectParameterBuilder<Present, HAS_B> fieldA(String fieldA) {
+        this.fieldA = fieldA;
+        return (MyObjectParameterBuilder<Present, HAS_B>) this;
+    }
+
+    // required field (HAS_B = Present, now)
+    public static MyObjectParameterBuilder<HAS_A, Present> fieldB(String fieldB) {
+        this.fieldB = fieldB;
+        return (MyObjectParameterBuilder<HAS_A, Present>) this;
+    }
+
+    // optional field (passes through the type variables)
+    public static MyObjectParameterBuilder<HAS_A, HAS_B> fieldC(String fieldC) {
+        this.fieldC = fieldC;
+        return this;
+    }
+}
+```
+
+**사용 예시**
+
+```java
+var parameterBuilder = MyObject.parameterBuilder()
+        .fieldA()
+        .fieldB()
+        .fieldC();
+
+var myObject = new MyObject(parameterBuilder);
+```
